@@ -7,7 +7,7 @@ echo -e "------------------------------\n"
 read opcao
 if [[ "$opcao" == "1" ]];then
 echo -e "Conectando a emissora Radio Web Campos Borges...\n"
-mplayer -ao pulse -volume 100 -loop 0 -nocache http://radio.mediacp.eu:18026/rdcamposborgesweb > /dev/null 2>&1
+mplayer -ao pulse -volume 100 -loop 0 -nocache http://radio.mediacp.eu:18026/rdcamposborgesweb
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "2" ]];then
