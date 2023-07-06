@@ -1,0 +1,69 @@
+#!/bin/bash
+echo -e "------------------------------\n"
+echo -e "Escolha uma radio para escutar:\n"
+echo -e "1 - Radio Web Campos Borges\n"
+echo -e "2 - Configuracoes do sistema\n"
+echo -e "------------------------------\n"
+read opcao
+if [[ "$opcao" == "1" ]];then
+echo -e "Conectando a emissora Radio Web Campos Borges...\n"
+mplayer -ao pulse -volume 100 -loop 0 -nocache http://radio.mediacp.eu:18026/rdcamposborgesweb > /dev/null 2>&1
+exec /usr/local/bin/shell_radio
+fi
+if [[ "$opcao" == "2" ]];then
+echo -e "---------------------------\n"
+echo -e "Configuracoes do sistema\n"
+echo -e "1 - Conectar Internet cabeada\n"
+echo -e "2 - Conectar Wifi (Internet sem fio)\n"
+echo -e "3 - Desconectar Wifi (Internet sem fio)\n"
+echo -e "4 - Aumentar volume da radio\n"
+echo -e "5 - Diminuir volume da radio\n"
+echo -e "6 - Adicionar rede Wifi(Internet sem fio)\n"
+echo -e "7 - Atualizar os arquivos necessarios para funcionar recepcao de radio e conexao a internet\n)"
+echo -e "----------------------------\n"
+read opcao
+if [[ "$opcao" == "1" ]];then
+sudo -u radio -g radio dhclient eth0
+exec /usr/local/bin/shell_radio
+fi
+if [[ "$opcao" == "2" ]];then
+sudo -u radio -g radio wpa_supplicant -D nl80211 -c /etc/wpa_supplicant.conf -i wlan0 &
+sleep 2
+sudo -u radio -g radio dhclient wlan0
+exec /usr/local/bin/shell_radio
+fi
+if [[ "$opcao" == "3" ]];then
+sudo -u radio -g radio killall wpa_supplicant
+sudo -u radio -g radio killall dhclient
+exec /usr/local/bin/shell_radio
+fi
+if [[ "$opcao" == "4" ]];then
+pactl set-sink-volume 0 +20%
+exec /usr/local/bin/shell_radio
+fi
+if [[ "$opcao" == "5" ]];then
+pactl set-sink-volume 0 -20%
+exec /usr/local/bin/shell_radio
+fi
+if [[ "$opcao" == "6" ]];then
+echo -e "Qual o SSID (nome da rede Wifi) que deseja conectar?\n"
+read ssid
+echo -e "Qual a senha da rede Wifi?\n"
+read senha
+sudo -u radio -g radio wpa_passphrase "$ssid" "$senha" > /etc/wpa_supplicant.conf
+exec /usr/local/bin/shell_radio
+fi
+if [[ "$opcao" == "7" ]];then
+echo -e "Atualizando o radio...\n"
+wget https://pastebin.com/raw/6uTr8jMJ -O /usr/local/bin/shell_radio
+chmod 777 /usr/local/bin/shell_radio
+echo -e "Reiniciando o menu...\n"
+exec /usr/local/bin/shell_radio
+fi
+if [[ "$opcao" == "" ]];then
+exec /usr/local/bin/shell_radio
+fi
+fi
+if [[ "$opcao" == "" ]];then
+exec /usr/local/bin/shell_radio
+fi
