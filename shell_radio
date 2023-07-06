@@ -50,7 +50,7 @@ echo -e "Qual o SSID (nome da rede Wifi) que deseja conectar?\n"
 read ssid
 echo -e "Qual a senha da rede Wifi?\n"
 read senha
-sudo -u root -g root -E 'wpa_passphrase "$ssid" "$senha" > /etc/wpa_supplicant.conf'
+sudo -u root -g root -sE sh -c "wpa_passphrase $ssid $senha > /etc/wpa_supplicant.conf"
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "7" ]];then
