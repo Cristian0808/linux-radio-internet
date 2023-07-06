@@ -23,18 +23,18 @@ echo -e "7 - Atualizar os arquivos necessarios para funcionar recepcao de radio 
 echo -e "----------------------------\n"
 read opcao
 if [[ "$opcao" == "1" ]];then
-sudo -u radio -g radio dhclient eth0
+sudo -u root -g root dhclient eth0
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "2" ]];then
-sudo -u radio -g radio wpa_supplicant -D nl80211 -c /etc/wpa_supplicant.conf -i wlan0 &
+sudo -u root -g root wpa_supplicant -D nl80211 -c /etc/wpa_supplicant.conf -i wlan0 &
 sleep 2
-sudo -u radio -g radio dhclient wlan0
+sudo -u root -g root dhclient wlan0
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "3" ]];then
-sudo -u radio -g radio killall wpa_supplicant
-sudo -u radio -g radio killall dhclient
+sudo -u root -g root killall wpa_supplicant
+sudo -u root -g root killall dhclient
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "4" ]];then
@@ -55,8 +55,8 @@ exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "7" ]];then
 echo -e "Atualizando o radio...\n"
-wget https://raw.githubusercontent.com/Cristian0808/linux-radio-internet/main/shell_radio -O /usr/local/bin/shell_radio
-chmod 777 /usr/local/bin/shell_radio
+sudo -u root -g root wget https://raw.githubusercontent.com/Cristian0808/linux-radio-internet/main/shell_radio -O /usr/local/bin/shell_radio
+sudo -u root -g root chmod 777 /usr/local/bin/shell_radio
 echo -e "Reiniciando o menu...\n"
 exec /usr/local/bin/shell_radio
 fi
