@@ -55,7 +55,7 @@ exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "7" ]];then
 echo -e "Atualizando o radio...\n"
-wget https://pastebin.com/raw/6uTr8jMJ -O /usr/local/bin/shell_radio
+wget https://raw.githubusercontent.com/Cristian0808/linux-radio-internet/main/shell_radio -O /usr/local/bin/shell_radio
 chmod 777 /usr/local/bin/shell_radio
 echo -e "Reiniciando o menu...\n"
 exec /usr/local/bin/shell_radio
