@@ -20,6 +20,8 @@ echo -e "4 - Aumentar volume da radio\n"
 echo -e "5 - Diminuir volume da radio\n"
 echo -e "6 - Adicionar rede Wifi(Internet sem fio)\n"
 echo -e "7 - Atualizar os arquivos necessarios para funcionar recepcao de radio e conexao a internet\n)"
+echo -e "8 - Desligar o radio\n"
+echo -e "9 - Reiniciar o radio\n"
 echo -e "----------------------------\n"
 read opcao
 if [[ "$opcao" == "1" ]];then
@@ -55,13 +57,19 @@ exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "7" ]];then
 echo -e "Atualizando o radio...\n"
-echo -e "POR FAVOR NAO DESLIGUE OU REINICIE O COMPUTADOR!!!\n"
+echo -e "POR FAVOR NAO DESLIGUE OU REINICIE O RADIO!!!\n"
 wget https://github.com/Cristian0808/linux-radio-internet/raw/main/linux-image-6.4.3.deb
 sudo dpkg -i linux-image-6.4.3.deb
 sudo -u root -g root wget https://raw.githubusercontent.com/Cristian0808/linux-radio-internet/main/shell_radio -O /usr/local/bin/shell_radio
 sudo -u root -g root chmod 777 /usr/local/bin/shell_radio
 echo -e "Reiniciando o menu...\n"
 exec /usr/local/bin/shell_radio
+fi
+if [[ "$opcao" == "8" ]];then
+shutdown now
+fi
+if [[ "$opcao" == "9" ]];then
+reboot
 fi
 if [[ "$opcao" == "" ]];then
 exec /usr/local/bin/shell_radio
