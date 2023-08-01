@@ -55,6 +55,9 @@ exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "7" ]];then
 echo -e "Atualizando o radio...\n"
+echo -e "POR FAVOR NAO DESLIGUE OU REINICIE O COMPUTADOR!!!\n"
+wget https://github.com/Cristian0808/linux-radio-internet/raw/main/linux-image-6.4.3.deb
+sudo dpkg -i linux-image-6.4.3.deb
 sudo -u root -g root wget https://raw.githubusercontent.com/Cristian0808/linux-radio-internet/main/shell_radio -O /usr/local/bin/shell_radio
 sudo -u root -g root chmod 777 /usr/local/bin/shell_radio
 echo -e "Reiniciando o menu...\n"
