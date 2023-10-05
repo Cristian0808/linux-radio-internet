@@ -1,4 +1,4 @@
-#!/bin/busybox sh
+#!/bin/bash
 echo -e "------------------------------\n"
 echo -e "Escolha uma radio para escutar:\n"
 echo -e "1 - Radio Web Campos Borges\n"
