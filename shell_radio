@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "nameserver 1.1.1.1" > /etc/resolv.conf
 echo -e "------------------------------\n"
 echo -e "Escolha uma radio para escutar:\n"
 echo -e "1 - Radio Web Campos Borges (emissora principal)\n"
@@ -25,18 +26,18 @@ echo -e "9 - Reiniciar o radio\n"
 echo -e "----------------------------\n"
 read opcao
 if [[ "$opcao" == "1" ]];then
-sudo -u root -g root dhclient eth0
+dhclient eth0
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "2" ]];then
-sudo -u root -g root wpa_supplicant -D nl80211 -c /etc/wpa_supplicant.conf -i wlan0 &
+wpa_supplicant -D nl80211 -c /etc/wpa_supplicant.conf -i wlan0 &
 sleep 2
-sudo -u root -g root dhclient wlan0
+dhclient wlan0
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "3" ]];then
-sudo -u root -g root killall wpa_supplicant
-sudo -u root -g root killall dhclient
+killall wpa_supplicant
+killall dhclient
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "4" ]];then
@@ -52,7 +53,7 @@ echo -e "Qual o SSID (nome da rede Wifi) que deseja conectar?\n"
 read ssid
 echo -e "Qual a senha da rede Wifi?\n"
 read senha
-sudo -u root -g root -sE sh -c "wpa_passphrase $ssid $senha > /etc/wpa_supplicant.conf"
+wpa_passphrase $ssid $senha > /etc/wpa_supplicant.conf
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "7" ]];then
