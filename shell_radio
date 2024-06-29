@@ -2,22 +2,15 @@
 echo -e "------------------------------\n"
 echo -e "Escolha uma radio para escutar:\n"
 echo -e "1 - Radio Web Campos Borges (emissora principal)\n"
-echo -e "2 - Radio Web Campos Borges (segunda emissora)\n"
-echo -e "3 - Configuracoes do sistema\n"
+echo -e "2 - Configuracoes do sistema\n"
 echo -e "------------------------------\n"
 read opcao
 if [[ "$opcao" == "1" ]];then
 echo -e "Conectando a emissora Radio Web Campos Borges...\n"
-mplayer -ao pulse -volume 100 -loop 0 -nocache http://radio.mediacp.eu:18026/rdcamposborgesweb
+mplayer -ao pulse -volume 100 -loop 0 -nocache http://rdcamposborgesrs.com:8081/rdcamposborgesweb
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "2" ]];then
-echo -e "Conectando a emissora Radio Web Campos Borges...\n"
-mplayer -ao pulse -volume 100 -loop 0 -nocache http://radio.mediacp.eu:18026/rdcamposborgesweb02
-exec /usr/local/bin/shell_radio
-fi
-
-if [[ "$opcao" == "3" ]];then
 echo -e "---------------------------\n"
 echo -e "Configuracoes do sistema\n"
 echo -e "1 - Conectar Internet cabeada\n"
