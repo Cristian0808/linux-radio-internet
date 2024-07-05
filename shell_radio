@@ -3,7 +3,8 @@ echo "nameserver 1.1.1.1" > /etc/resolv.conf
 echo -e "------------------------------\n"
 echo -e "Escolha uma radio para escutar:\n"
 echo -e "1 - Radio Web Campos Borges (emissora principal)\n"
-echo -e "2 - Configuracoes do sistema\n"
+echo -e "2 - Assistir TV\n"
+echo -e "3 - Configuracoes do sistema\n"
 echo -e "------------------------------\n"
 read opcao
 if [[ "$opcao" == "1" ]];then
@@ -12,6 +13,12 @@ mplayer -ao pulse -volume 100 -loop 0 -nocache http://rdcamposborgesrs.com:8081/
 exec /usr/local/bin/shell_radio
 fi
 if [[ "$opcao" == "2" ]];then
+echo -e "Conectando a emissora Radio Web Campos Borges...\n"
+wget https://pastebin.com/raw/EWmtd7Xc -O /tmp/channels.m3u
+mplayer -ao pulse -vo sdl -volume 100 -loop 0 -nocache -playlist /tmp/channels.m3u
+exec /usr/local/bin/shell_radio
+fi
+if [[ "$opcao" == "3" ]];then
 echo -e "---------------------------\n"
 echo -e "Configuracoes do sistema\n"
 echo -e "1 - Conectar Internet cabeada\n"
